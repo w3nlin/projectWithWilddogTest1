@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        #content{
+            width: 200px;
+            height:200px;
+            overflow: scroll;
+            display: block;
+        }
+        #view{
+            position: fixed;
+            right:0px;
+            top:0px;
+            width: 200px;
+            border:1px solid black;
+            height:800px;
+            overflow: scroll;
+        }
+    </style>
+    <script src="jquery-1.8.3.min.js"></script>
+    <script>
+        function getPost(){
+            $.ajax({
+                type:"get",
+                url:"https://wd4184960023xstjic.wilddogio.com/test1.json",
+                contentType:"application/json;charset=utf-8",
+                dataType:"json",
+                async:false,
+                success:function(data){
+                    if(data!=null){
+                        $.each(data,function(index,value){
+                            if(data.length!=0){
+                                var oH1=$("<h1>").text(value.title);
+                                oH1.css({
+                                    width:200+"px",
+                                    height:50+"px",
+                                    border:"1px solid red"
+                                })
+                                var oP=$("<p>").text(value.content);
+                                oP.css({
+                                    width:200+"px",
+                                    border:"1px solid blue"
+                                })
+                                $("#view").append(oH1);
+                                $("#view").append(oP);
+                            }
+                        })
+                    }
+                },
+            })
+        }
+        $(document).ready(function(){
+            getPost();
+            $("#sub").on("click",function(){
+                $.ajax({
+                    type:"post",
+                    url:"https://wd4184960023xstjic.wilddogio.com/test1.json",
+                    contentType:"application/json;charset=utf-8",
+                    dataType:"json",
+                    async:false,
+                    data:JSON.stringify({"title":""+$("#title").val(),"content":""+$("#content").val()}),
+                    success:function(){
+                        getPost();
+                        /*$("#view").appendChild("h1").val();*/
+                    },
+                    error:function(data){alert("失败"+data);console.log(data)}
+                });
+            })
+
+        })
+    </script>
+</head>
+<body>
+title:<br><input id="title" type="text"> <br>
+content:<textarea id="content"></textarea>
+<button id="sub">提交</button>
+<div id="view">
+
+</div>
+</body>
+</html>
