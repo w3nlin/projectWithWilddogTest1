@@ -8,11 +8,23 @@
             padding:0;
             margin:0;
         }
+        #title{width: 400px;
+            height:100px;
+            font-size: 60px;
+        }
         #content{
-            width: 200px;
-            height:200px;
+            width: 400px;
+            height:400px;
             overflow: scroll;
             display: block;
+        }
+        #sub{
+            width: 400px;
+            height:200px;
+            font-size: 150px;
+            position:relative;
+            left:150px;
+            font-size: 120px;
         }
         #view{
             position: fixed;
@@ -41,12 +53,14 @@
                                 oH1.css({
                                     width:200+"px",
                                     height:50+"px",
-                                    border:"1px solid red"
+                                    border:"1px solid red",
+                                    color:"blue"
                                 })
                                 var oP=$("<p>").text(value.content);
                                 oP.css({
                                     width:200+"px",
-                                    border:"1px solid blue"
+                                    border:"1px solid blue",
+                                    textIndent:1+"cm",
                                 })
                                 $("#view").append(oH1);
                                 $("#view").append(oP);
